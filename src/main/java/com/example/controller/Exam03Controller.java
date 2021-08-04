@@ -11,10 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class Exam03Controller {
 	
 	@Autowired
-	private ServletContext apllication;
+	private ServletContext application;
 
 	@RequestMapping("")
 	public String index() {
 		return "exam03";
+	}
+	
+	@RequestMapping("/receive-form")
+	public String receiveForm(int num1, int num2, int num3) {
+		int result = num1 + num2 + num3;
+		int resultOnTax = (int) (result * 1.10);
+		application.setAttribute("result", result);
+		application.setAttribute("resultOnTax", resultOnTax);
+		
+		return "exam03-result";
 	}
 }
